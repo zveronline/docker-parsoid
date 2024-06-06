@@ -12,14 +12,15 @@ COPY run-parsoid.sh /run-parsoid.sh
 # Parsoid setup
 RUN set -x \
     # Install required packages
-    && apk add --no-cache nodejs nodejs-npm python2 git tar bash make g++  \
+    && apk add --no-cache npm python2 git tar bash make g++  \
     # Add user
     && adduser -D -u 1000 -s /bin/bash $PARSOID_USER \
     # Set permissions
     && chmod -v +x /run-parsoid.sh \
     # Core
     && mkdir -p $PARSOID_HOME
-RUN git clone \
+
+RUN set -x && git clone \
         --branch ${PARSOID_VERSION} \
         --single-branch \
         --depth 1 \
