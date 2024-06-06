@@ -1,0 +1,41 @@
+variables:
+#  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+#  IMAGE_TAG: $CI_REGISTRY_IMAGE:latest
+
+parsoid-arm:
+  stage: build
+  tags:
+    - docker-arm
+  image: docker:stable
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:0.10-arm64 -f Dockerfile .
+    - docker push $CI_REGISTRY_IMAGE:0.10-arm64
+parsoid11-arm:
+  stage: build
+  tags:
+    - docker-arm
+  image: docker:stable
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:0.11-arm64 -f Dockerfile.11 .
+    - docker push $CI_REGISTRY_IMAGE:0.11-arm64
+
+parsoid:
+  stage: build
+  tags:
+    - docker
+  image: docker:stable
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:0.10 -f Dockerfile .
+    - docker push $CI_REGISTRY_IMAGE:0.10
+parsoid11:
+  stage: build
+  tags:
+    - docker
+  image: docker:stable
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:0.11 -f Dockerfile.11 .
+    - docker push $CI_REGISTRY_IMAGE:0.11
