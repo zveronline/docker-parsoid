@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3.14
 
 LABEL maintainer="mail@zveronline.ru"
 
@@ -18,8 +18,8 @@ RUN set -x \
     # Set permissions
     && chmod -v +x /run-parsoid.sh \
     # Core
-    && mkdir -p $PARSOID_HOME \
-    && git clone \
+    && mkdir -p $PARSOID_HOME
+RUN git clone \
         --branch ${PARSOID_VERSION} \
         --single-branch \
         --depth 1 \
@@ -27,6 +27,8 @@ RUN set -x \
         https://github.com/wikimedia/mediawiki-services-parsoid \
         $PARSOID_HOME \
     && cd $PARSOID_HOME \
+    && pwd \
+    && ls \
     && npm install
 
 EXPOSE 8000
