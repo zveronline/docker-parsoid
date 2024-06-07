@@ -5,7 +5,7 @@ LABEL maintainer="mail@zveronline.ru"
 ENV PARSOID_HOME=/var/lib/parsoid \
     PARSOID_USER=parsoid \
     # PARSOID_VERSION [v0.8.1, v0.9.0, v0.10.0, v0.11.0, master]
-    PARSOID_VERSION=v0.11.1
+    PARSOID_VERSION=v0.11.0
 
 COPY run-parsoid.sh /run-parsoid.sh
 
@@ -25,7 +25,7 @@ RUN set -x && git clone \
         --single-branch \
         --depth 1 \
         --quiet \
-        https://github.com/wikimedia/mediawiki-services-parsoid \
+        https://gerrit.wikimedia.org/g/mediawiki/services/parsoid/ \
         $PARSOID_HOME \
     && cd $PARSOID_HOME \
     && pwd \
