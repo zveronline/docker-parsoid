@@ -25,7 +25,7 @@ RUN set -x && git clone \
         --single-branch \
         --depth 1 \
         --quiet \
-        https://gerrit.wikimedia.org/g/mediawiki/services/parsoid/ \
+        https://gerrit.wikimedia.org/r/mediawiki/services/parsoid \
         $PARSOID_HOME \
     && cd $PARSOID_HOME \
     && pwd \
